@@ -21,12 +21,16 @@ func _on_connected_to_server():
 
 func handle_name():
 	if name_input.text:
+		check_server_or_not(Network.increment_player_count, Network.player_count_changed)
 		return name_input.text
 	else:
-		if not multiplayer.is_server():
-			Network.increment_player_count.rpc_id(1)
-			await Network.player_count_changed
-		else:
-			Network.increment_player_count()
+		check_server_or_not(Network.increment_player_count, Network.player_count_changed)
 		var default_name = "Player" + str(Network.player_count)
 		return default_name
+
+func check_server_or_not(fun: Callable, signal_to_await: Signal):
+	if not multiplayer.is_server():
+		fun.rpc_id(1)
+		await signal_to_await
+	else:
+		fun.call()
