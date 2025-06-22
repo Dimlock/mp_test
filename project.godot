@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Network="*res://network.tscn"
-NetworkChatManager="*res://network_chat_manager.tscn"
 
 [rendering]
 

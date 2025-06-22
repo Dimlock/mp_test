@@ -2,7 +2,6 @@ extends Node
 
 signal chat_history_changed(message)
 
-
 var chat_history = "":
 	set(value):
 		chat_history = value
