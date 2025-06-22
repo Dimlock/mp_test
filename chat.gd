@@ -13,7 +13,7 @@ func _on_send_pressed() -> void:
 	if not multiplayer.is_server():
 		NetworkChatManager.send_message.rpc_id(1, message_text.text)
 	else:
-		NetworkChatManager.chat_history += "\nServer: " + message_text.text
+		NetworkChatManager.send_message(message_text.text)
 
 func _on_chat_history_changed(message):
 	chat_text.text = message

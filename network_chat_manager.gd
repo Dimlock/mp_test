@@ -10,4 +10,7 @@ var chat_history = "":
 
 @rpc("any_peer")
 func send_message(message):
-	chat_history += "\n" + Network.find_peer_nickname(multiplayer.get_remote_sender_id()) + ": " + message
+	var nickname = Network.find_peer_nickname(multiplayer.get_remote_sender_id())
+	if not nickname:
+		nickname = Network.find_peer_nickname(1)
+	chat_history += "\n" + nickname + ": " + message
