@@ -1,21 +1,14 @@
 extends Node
 
+signal player_count_changed
+
 @export var chat_scene: PackedScene
 
 var peers = []
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	multiplayer.peer_connected.connect(_on_peer_connected)
-	
-
-
-func _on_peer_connected(id):
-	if multiplayer.is_server():
-		peers.append({"Name": "Player" + str(id), "id": id})
-		if peers.size() == 2:
-			change_scene.rpc()
-
+var player_count = 0:
+	set(value):
+		player_count = value
+		player_count_changed.emit()
 
 @rpc("call_local")
 func change_scene():
@@ -26,3 +19,11 @@ func find_peer_nickname(id):
 	for peer in peers:
 		if peer["id"] == id:
 			return peer["Name"]
+			
+@rpc("any_peer")
+func add_peer(name, id):
+	peers.append({"id": id, "name": name})
+
+@rpc("any_peer")
+func increment_player_count():
+	player_count += 1
