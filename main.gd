@@ -1,4 +1,5 @@
 extends Control
+@export var lobby_scene: PackedScene
 @onready var name_input: LineEdit = %NameInput
 
 func _ready() -> void:
@@ -9,6 +10,7 @@ func _on_host_pressed() -> void:
 	peer.create_server(5202)
 	multiplayer.multiplayer_peer = peer
 	Network.add_peer(await handle_name(), 1)
+	get_tree().change_scene_to_packed(lobby_scene)
 
 func _on_connect_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
@@ -16,8 +18,8 @@ func _on_connect_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 
 func _on_connected_to_server():
-	if not multiplayer.is_server():
-		Network.add_peer.rpc_id(1, await handle_name(), multiplayer.get_unique_id())
+	Network.add_peer.rpc_id(1, await handle_name(), multiplayer.get_unique_id())
+	get_tree().change_scene_to_packed(lobby_scene)
 
 func handle_name():
 	if name_input.text:
