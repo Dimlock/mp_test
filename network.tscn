@@ -1,8 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bun7gu256h5br"]
+[gd_scene load_steps=4 format=3 uid="uid://bun7gu256h5br"]
 
 [ext_resource type="Script" uid="uid://dyl2c5kolmf3q" path="res://network.gd" id="1_n0pfp"]
 [ext_resource type="PackedScene" uid="uid://bs7q8ygmbtyyt" path="res://chat.tscn" id="2_3lcwk"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_n0pfp"]
+properties/0/path = NodePath(".:peers")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+
 [node name="Network" type="Node"]
 script = ExtResource("1_n0pfp")
 chat_scene = ExtResource("2_3lcwk")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_n0pfp")

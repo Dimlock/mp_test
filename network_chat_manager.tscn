@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ny3jfu5fpmxu"]
+
+[ext_resource type="Script" uid="uid://3rklucf78r5m" path="res://network_chat_manager.gd" id="1_3dr4d"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2wucn"]
+properties/0/path = NodePath(".:chat_history")
+properties/0/spawn = false
+properties/0/replication_mode = 2
+
+[node name="NetworkChatManager" type="Node"]
+script = ExtResource("1_3dr4d")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2wucn")

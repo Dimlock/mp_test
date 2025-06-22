@@ -5,18 +5,15 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	NetworkChatManager.chat_history_changed.connect(_on_chat_history_changed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_send_pressed() -> void:
-	Network.get_message.rpc(message_text.text)
-	update_chat.rpc()
+	if not multiplayer.is_server():
+		NetworkChatManager.send_message.rpc_id(1, message_text.text)
+	else:
+		NetworkChatManager.chat_history += "\nServer: " + message_text.text
 
-@rpc("any_peer","call_local")
-func update_chat():
-	chat_text.text = Network.chat_history
+func _on_chat_history_changed(message):
+	chat_text.text = message
