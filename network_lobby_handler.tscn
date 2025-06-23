@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtrciy152oxmn"]
+
+[ext_resource type="Script" uid="uid://prtt5lv41nif" path="res://network_lobby_handler.gd" id="1_7x0nf"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7x0nf"]
+properties/0/path = NodePath(".:peers_ready")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="NetworkLobbyHandler" type="Node"]
+script = ExtResource("1_7x0nf")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7x0nf")

@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal player_ready(uid: int)
+signal player_not_ready(uid: int)
 
 @onready var player_name: Label = %PlayerName
 @onready var ready_button: Button = $ReadyButton
@@ -23,6 +25,8 @@ func _on_ready_button_pressed() -> void:
 		return
 	if ready_pressed:
 		ready_button.text = ""
+		player_not_ready.emit(uid)
 	else:
 		ready_button.text = "X"
+		player_ready.emit(uid)
 	ready_pressed = not ready_pressed

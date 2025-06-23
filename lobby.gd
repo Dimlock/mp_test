@@ -2,6 +2,7 @@ extends Control
 @export var player_in_lobby_scene: PackedScene
 @onready var players_list: VBoxContainer = %PlayersList
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
+@onready var network_lobby_handler: Node = $NetworkLobbyHandler
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,4 +21,12 @@ func _on_peer_connected(id):
 func custom_spawn(data):
 	var node = player_in_lobby_scene.instantiate()
 	node.setup(data["name"], data["id"])
+	node.player_ready.connect(_on_player_ready)
+	node.player_not_ready.connect(_on_player_not_ready)
 	return node
+
+func _on_player_ready(uid):
+	network_lobby_handler.add_peer(uid)
+
+func _on_player_not_ready(uid):
+	network_lobby_handler.delete_peer(uid)
