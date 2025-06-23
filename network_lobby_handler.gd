@@ -1,6 +1,16 @@
 extends Node
 
-var peers_ready: Array[int]
+signal all_players_ready
+
+@onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+
+var peers_ready: Array[int]:
+	set(value):
+		peers_ready = value
+		await multiplayer_synchronizer.synchronized
+		if peers_ready.size() == Network.peers.size():
+			all_players_ready.emit()
+
 
 func add_peer(uid):
 	peers_ready.append(uid)

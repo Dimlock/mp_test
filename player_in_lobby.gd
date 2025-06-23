@@ -30,3 +30,8 @@ func _on_ready_button_pressed() -> void:
 		ready_button.text = "X"
 		player_ready.emit(uid)
 	ready_pressed = not ready_pressed
+
+func clear_button_state():
+	ready_button.text = ""
+	ready_pressed = false
+	player_not_ready.emit(uid)

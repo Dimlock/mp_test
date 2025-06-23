@@ -1,8 +1,12 @@
 extends Control
+
 @export var player_in_lobby_scene: PackedScene
+@export var timer_scene: PackedScene
+
 @onready var players_list: VBoxContainer = %PlayersList
 @onready var multiplayer_spawner: MultiplayerSpawner = $MultiplayerSpawner
 @onready var network_lobby_handler: Node = $NetworkLobbyHandler
+@onready var timer_spawner: Control = $TimerSpawner
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,3 +34,18 @@ func _on_player_ready(uid):
 
 func _on_player_not_ready(uid):
 	network_lobby_handler.delete_peer(uid)
+
+
+func _on_network_lobby_handler_all_players_ready() -> void:
+	clear_buttons_state.rpc()
+	spawn_timer.rpc()
+
+@rpc("any_peer", "call_local")
+func spawn_timer():
+	var timer_node = timer_scene.instantiate()
+	timer_spawner.add_child(timer_node)
+
+@rpc("any_peer", "call_local")
+func clear_buttons_state():
+	for child in players_list.get_children():
+		child.clear_button_state()
