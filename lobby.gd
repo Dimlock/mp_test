@@ -11,6 +11,7 @@ extends Control
 func _ready() -> void:
 	multiplayer_spawner.spawn_function = custom_spawn
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	if multiplayer.is_server():
 		_on_peer_connected(1)
 
@@ -21,6 +22,10 @@ func _on_peer_connected(id):
 	var peer = Network.find_peer_by_id(id)
 	if multiplayer.is_server():
 		multiplayer_spawner.spawn(peer)
+
+func _on_peer_disconnected(id):
+	print("Wait for peer to reconnect")
+	_on_player_not_ready(id)
 
 func custom_spawn(data):
 	var node = player_in_lobby_scene.instantiate()

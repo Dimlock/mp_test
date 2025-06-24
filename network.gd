@@ -28,8 +28,16 @@ func find_peer_by_id(id):
 
 @rpc("any_peer")
 func add_peer(peer_name, id):
-	peers.append({"id": id, "name": peer_name})
-	peer_added.emit()
+	var is_new_peer = true
+	for peer in peers:
+		if peer_name == peer["name"]:
+			is_new_peer = false
+			peer["id"] = id
+			break
+	if is_new_peer:
+		peers.append({"id": id, "name": peer_name})
+		peer_added.emit()
+
 
 @rpc("any_peer")
 func increment_player_count():
