@@ -27,8 +27,8 @@ func find_peer_by_id(id):
 			return peer
 
 @rpc("any_peer")
-func add_peer(name, id):
-	peers.append({"id": id, "name": name})
+func add_peer(peer_name, id):
+	peers.append({"id": id, "name": peer_name})
 	peer_added.emit()
 
 @rpc("any_peer")

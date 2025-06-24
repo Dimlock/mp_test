@@ -47,4 +47,9 @@ offset_top = 159.0
 offset_right = 270.0
 offset_bottom = 807.0
 
+[node name="Timer_mp_spawner" type="MultiplayerSpawner" parent="TimerSpawner"]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("uid://cn7jqqk4ip177")
+spawn_path = NodePath("..")
+
 [connection signal="all_players_ready" from="NetworkLobbyHandler" to="." method="_on_network_lobby_handler_all_players_ready"]
