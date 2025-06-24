@@ -53,3 +53,4 @@ _spawnable_scenes = PackedStringArray("uid://cn7jqqk4ip177")
 spawn_path = NodePath("..")
 
 [connection signal="all_players_ready" from="NetworkLobbyHandler" to="." method="_on_network_lobby_handler_all_players_ready"]
+[connection signal="someone_not_ready" from="NetworkLobbyHandler" to="." method="_on_network_lobby_handler_someone_not_ready"]

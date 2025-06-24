@@ -40,3 +40,10 @@ func _on_network_lobby_handler_all_players_ready() -> void:
 	if multiplayer.is_server():
 		var timer_node = timer_scene.instantiate()
 		timer_spawner.add_child(timer_node)
+
+func _on_network_lobby_handler_someone_not_ready() -> void:
+	if multiplayer.is_server():
+		if timer_spawner.get_child_count() > 1:
+			for child in timer_spawner.get_children():
+				if not child is MultiplayerSpawner:
+					child.queue_free()
