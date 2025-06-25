@@ -6,6 +6,7 @@ extends Control
 
 func _on_host_pressed() -> void:
 	if check_peer_name():
+		multiplayer.peer_name = name_input.text
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(5202)
 		multiplayer.multiplayer_peer = peer
@@ -21,4 +22,4 @@ func _on_connect_pressed() -> void:
 
 
 func check_peer_name():
-	return name_input.text.is_empty()
+	return not name_input.text.is_empty()

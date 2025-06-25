@@ -1,6 +1,5 @@
 extends Node
 
-signal peer_connected
 
 @export var peer_scene: PackedScene
 
@@ -16,7 +15,7 @@ func _ready() -> void:
 func _on_peer_connected(id, peer_name):
 	var new_peer = peer_scene.instantiate()
 	new_peer.name = peer_name
-	peers.add_child(new_peer)
+	peers.add_child(new_peer, true)
 
 #@rpc("any_peer")
 #func add_peer(peer_name, id):	
