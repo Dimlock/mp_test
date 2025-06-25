@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://breyp3c0xjy1d"]
+[gd_scene load_steps=5 format=3 uid="uid://breyp3c0xjy1d"]
 
 [ext_resource type="Script" uid="uid://bav5kga1pvge5" path="res://lobby.gd" id="1_2wvic"]
 [ext_resource type="PackedScene" uid="uid://bs7q8ygmbtyyt" path="res://chat.tscn" id="1_ll2xe"]
 [ext_resource type="PackedScene" uid="uid://c5djpgqn2478m" path="res://player_in_lobby.tscn" id="1_xrgmn"]
 [ext_resource type="PackedScene" uid="uid://cn7jqqk4ip177" path="res://lobby_timer.tscn" id="3_1gg6n"]
-[ext_resource type="PackedScene" uid="uid://dtrciy152oxmn" path="res://network_lobby_handler.tscn" id="4_tftiq"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -36,21 +35,3 @@ size_flags_horizontal = 3
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../HBoxContainer/PlayersList")
-
-[node name="NetworkLobbyHandler" parent="." instance=ExtResource("4_tftiq")]
-
-[node name="TimerSpawner" type="Control" parent="."]
-layout_mode = 2
-anchors_preset = 0
-offset_left = 270.0
-offset_top = 159.0
-offset_right = 270.0
-offset_bottom = 807.0
-
-[node name="Timer_mp_spawner" type="MultiplayerSpawner" parent="TimerSpawner"]
-unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("uid://cn7jqqk4ip177")
-spawn_path = NodePath("..")
-
-[connection signal="all_players_ready" from="NetworkLobbyHandler" to="." method="_on_network_lobby_handler_all_players_ready"]
-[connection signal="someone_not_ready" from="NetworkLobbyHandler" to="." method="_on_network_lobby_handler_someone_not_ready"]

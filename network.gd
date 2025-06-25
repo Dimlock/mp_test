@@ -1,44 +1,36 @@
 extends Node
 
-signal player_count_changed
-signal peer_added
-
-@export var chat_scene: PackedScene
+signal peer_connected
 
 var peers = []
-var player_count = 0:
-	set(value):
-		player_count = value
-		player_count_changed.emit()
 
-@rpc("call_local")
-func change_scene():
-	get_tree().change_scene_to_packed(chat_scene)
-	
-	
-func find_peer_nickname(id):
-	for peer in peers:
-		if peer["id"] == id:
-			return peer["name"]
-			
-func find_peer_by_id(id):
-	for peer in peers:
-		if peer["id"] == id:
-			return peer
+@onready var multiplayer_synchronizer: MultiplayerSynchronizer = %MultiplayerSynchronizer
+
+func wait_for_sync():
+	if peers.size() > 1:
+		await multiplayer_synchronizer.synchronized
+
 
 @rpc("any_peer")
 func add_peer(peer_name, id):
 	var is_new_peer = true
+	check_peer(peer_name, id, is_new_peer)
+	if is_new_peer:
+		var new_peer = {"id": id, "name": peer_name, "ready": false}
+		peers.append(new_peer)
+		peer_connected.emit(new_peer)
+
+
+func check_peer(peer_name, id, is_new_peer):
 	for peer in peers:
 		if peer_name == peer["name"]:
 			is_new_peer = false
 			peer["id"] = id
+			peer_connected.emit(peer)
 			break
-	if is_new_peer:
-		peers.append({"id": id, "name": peer_name})
-		peer_added.emit()
 
-
-@rpc("any_peer")
-func increment_player_count():
-	player_count += 1
+func get_peer(id):
+	for peer in peers:
+		if peer["id"] == id:
+			return peer
+	return null
