@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bun7gu256h5br"]
+[gd_scene load_steps=2 format=3 uid="uid://bun7gu256h5br"]
 
 [ext_resource type="Script" uid="uid://dyl2c5kolmf3q" path="res://network.gd" id="1_n0pfp"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_n0pfp"]
-properties/0/path = NodePath(".:peers")
-properties/0/spawn = true
-properties/0/replication_mode = 1
 
 [node name="Network" type="Node"]
 script = ExtResource("1_n0pfp")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="Peers" type="Node" parent="."]
 unique_name_in_owner = true
-replication_config = SubResource("SceneReplicationConfig_n0pfp")
+
+[node name="PeerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cx756c6oeyvlu")
+spawn_path = NodePath("../Peers")
