@@ -8,7 +8,7 @@ func _on_host_pressed() -> void:
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(5202)
 		multiplayer.multiplayer_peer = peer
-		Network.spawn_peer(create_peer_data())
+		Network.spawn_peer(1, "Server")
 
 func _on_connect_pressed() -> void:
 	if check_peer_name():
@@ -16,7 +16,7 @@ func _on_connect_pressed() -> void:
 		peer.create_client("localhost", 5202)
 		multiplayer.multiplayer_peer = peer
 		await multiplayer.connected_to_server
-		Network.spawn_peer.rpc_id(1, create_peer_data())
+		Network.spawn_peer(multiplayer.get_unique_id(), name_input.text)
 
 func check_peer_name():
 	return not name_input.text.is_empty()
