@@ -1,0 +1,2 @@
+extends SceneMultiplayer
+class_name CustomSceneMultiplayer
