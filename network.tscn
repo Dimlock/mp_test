@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bun7gu256h5br"]
 
 [ext_resource type="Script" uid="uid://dyl2c5kolmf3q" path="res://network.gd" id="1_n0pfp"]
-[ext_resource type="PackedScene" uid="uid://cx756c6oeyvlu" path="res://peer.tscn" id="2_n0pfp"]
+[ext_resource type="PackedScene" uid="uid://cx756c6oeyvlu" path="res://Peer/peer.tscn" id="2_n0pfp"]
 
 [node name="Network" type="Node"]
 script = ExtResource("1_n0pfp")

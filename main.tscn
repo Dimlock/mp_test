@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qys8gd5bwj3f" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://breyp3c0xjy1d" path="res://lobby.tscn" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://cx756c6oeyvlu" path="res://peer.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cx756c6oeyvlu" path="res://Peer/peer.tscn" id="3_h2yge"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

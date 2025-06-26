@@ -3,16 +3,12 @@ extends Control
 @export var peer_scene: PackedScene
 @onready var name_input: LineEdit = %NameInput
 
-
-
 func _on_host_pressed() -> void:
 	if check_peer_name():
 		var peer = ENetMultiplayerPeer.new()
 		peer.create_server(5202)
 		multiplayer.multiplayer_peer = peer
 		Network.spawn_peer(create_peer_data())
-
-
 
 func _on_connect_pressed() -> void:
 	if check_peer_name():
@@ -21,7 +17,6 @@ func _on_connect_pressed() -> void:
 		multiplayer.multiplayer_peer = peer
 		await multiplayer.connected_to_server
 		Network.spawn_peer.rpc_id(1, create_peer_data())
-
 
 func check_peer_name():
 	return not name_input.text.is_empty()
