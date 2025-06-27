@@ -1,15 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bun7gu256h5br"]
 
 [ext_resource type="Script" uid="uid://dyl2c5kolmf3q" path="res://network.gd" id="1_n0pfp"]
-[ext_resource type="PackedScene" uid="uid://cx756c6oeyvlu" path="res://Peer/peer.tscn" id="2_n0pfp"]
+[ext_resource type="PackedScene" uid="uid://buep77xjjr3y8" path="res://player.tscn" id="2_n0pfp"]
 
 [node name="Network" type="Node"]
 script = ExtResource("1_n0pfp")
-peer_scene = ExtResource("2_n0pfp")
+player_scene = ExtResource("2_n0pfp")
 
-[node name="Peers" type="Node" parent="."]
+[node name="Players" type="Node" parent="."]
 unique_name_in_owner = true
-
-[node name="PeerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cx756c6oeyvlu")
-spawn_path = NodePath("../Peers")

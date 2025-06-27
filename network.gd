@@ -1,20 +1,35 @@
 extends Node
 
 
-@export var peer_scene: PackedScene
+@export var player_scene: PackedScene
 
-@onready var peers: Node = %Peers
-@onready var peer_spawner: MultiplayerSpawner = $PeerSpawner
+@onready var players: Node = %Players
+
+var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 
 func _ready() -> void:
-	peer_spawner.spawn_function = custom_spawn
+	pass
 
-func spawn_peer(peer_id, peer_name):
-	var new_peer = peer_scene.instantiate()
-	new_peer.name = peer_name
-	new_peer.id = peer_id
-	peers.add_child(new_peer, true)
-	peer_spawner.spawn(new_peer)
-	
-func custom_spawn(data):
-	return data
+
+func create_server():
+	peer.create_server(6666)
+	multiplayer.multiplayer_peer = peer
+	create_player("Server", 1)
+
+func create_client():
+	peer.create_client("localhost", 6666)
+	multiplayer.multiplayer_peer = peer
+	await multiplayer.connected_to_server
+	print(str(multiplayer.get_unique_id()) + " connected")
+
+@rpc("any_peer")
+func create_player(player_name, player_id):
+	var player_node = player_scene.instantiate()
+	player_node.name = player_name
+	player_node.set_multiplayer_authority(player_id)
+	players.add_child(player_node)
+
+@rpc
+func spawn_players():
+	for player in players.get_children():
+		pass

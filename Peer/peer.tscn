@@ -1,17 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx756c6oeyvlu"]
+[gd_scene load_steps=2 format=3 uid="uid://cx756c6oeyvlu"]
 
 [ext_resource type="Script" uid="uid://bvoc660pgupmw" path="res://Peer/peer.gd" id="1_cd3hg"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cd3hg"]
-properties/0/path = NodePath(".:id")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:is_ready")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [node name="Peer" type="Node"]
 script = ExtResource("1_cd3hg")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_cd3hg")
