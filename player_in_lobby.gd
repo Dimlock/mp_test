@@ -1,29 +1,23 @@
 extends HBoxContainer
 
-signal player_ready(uid: int)
-signal player_not_ready(uid: int)
 
-@onready var player_name: Label = %PlayerName
 @onready var ready_button: Button = $ReadyButton
+@onready var player_name_label: Label = %PlayerName
 
-var player_peer
+var pressed: bool
 
-func set_peer(peer):
-	player_peer = peer
-
-func _enter_tree() -> void:
-	set_multiplayer_authority(player_peer["id"])
-
-func _ready() -> void:
-	player_name.text = player_peer["name"]
+func set_player_name(player_name):
+	name = player_name
+	player_name_label.text = player_name
 
 func _on_ready_button_pressed() -> void:
-	if not ready_button.is_multiplayer_authority():
-		return
-	if player_peer["ready"]:
-		ready_button.text = ""
-		player_not_ready.emit(multiplayer.get_unique_id())
-	else:
+	if is_multiplayer_authority():
+		update_readiness.rpc()
+
+@rpc("call_local")
+func update_readiness():
+	if !pressed:
 		ready_button.text = "X"
-		player_ready.emit(multiplayer.get_unique_id())
-	player_peer["ready"] = not player_peer["ready"]
+	else:
+		ready_button.text = ""
+	pressed = !pressed

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://breyp3c0xjy1d"]
+[gd_scene load_steps=3 format=3 uid="uid://breyp3c0xjy1d"]
 
 [ext_resource type="Script" uid="uid://bav5kga1pvge5" path="res://lobby.gd" id="1_2wvic"]
-[ext_resource type="PackedScene" uid="uid://bs7q8ygmbtyyt" path="res://chat.tscn" id="1_ll2xe"]
 [ext_resource type="PackedScene" uid="uid://c5djpgqn2478m" path="res://player_in_lobby.tscn" id="1_xrgmn"]
-[ext_resource type="PackedScene" uid="uid://cn7jqqk4ip177" path="res://lobby_timer.tscn" id="3_1gg6n"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -14,7 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2wvic")
 player_in_lobby_scene = ExtResource("1_xrgmn")
-timer_scene = ExtResource("3_1gg6n")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -28,10 +25,3 @@ grow_vertical = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Chat" parent="HBoxContainer" instance=ExtResource("1_ll2xe")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../HBoxContainer/PlayersList")
