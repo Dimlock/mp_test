@@ -7,8 +7,7 @@ func _on_host_pressed() -> void:
 
 func _on_connect_pressed() -> void:
 	if check_peer_name():
-		await Network.create_client()
-		Network.create_player.rpc_id(1, name_input.text, multiplayer.get_unique_id())
+		Network.create_client(name_input.text)
 
 func check_peer_name():
 	return not name_input.text.is_empty()
