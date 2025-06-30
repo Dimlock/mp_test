@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://breyp3c0xjy1d"]
+[gd_scene load_steps=4 format=3 uid="uid://breyp3c0xjy1d"]
 
 [ext_resource type="Script" uid="uid://bav5kga1pvge5" path="res://lobby.gd" id="1_2wvic"]
 [ext_resource type="PackedScene" uid="uid://c5djpgqn2478m" path="res://player_in_lobby.tscn" id="1_xrgmn"]
+[ext_resource type="PackedScene" uid="uid://cn7jqqk4ip177" path="res://lobby_timer.tscn" id="3_2wvic"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2wvic")
 player_in_lobby_scene = ExtResource("1_xrgmn")
+timer_scene = ExtResource("3_2wvic")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
