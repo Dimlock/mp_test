@@ -7,9 +7,9 @@ var chat_history = "":
 		chat_history = value
 		chat_history_changed.emit(value)
 
-@rpc("any_peer")
+@rpc("any_peer", "call_local")
 func send_message(message):
-	var nickname = Network.find_peer_nickname(multiplayer.get_remote_sender_id())
-	if not nickname:
-		nickname = Network.find_peer_nickname(1)
-	chat_history += "\n" + nickname + ": " + message
+	var player = PlayerManager.get_player_by_id(multiplayer.get_remote_sender_id())
+	if not player:
+		player = PlayerManager.get_player_by_id(get_multiplayer_authority())
+	chat_history += "\n" + player.name + ": " + message

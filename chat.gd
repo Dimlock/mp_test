@@ -12,10 +12,8 @@ func _ready() -> void:
 
 
 func _on_send_pressed() -> void:
-	if not multiplayer.is_server():
-		network_chat_manager.send_message.rpc_id(1, message_text.text)
-	else:
-		network_chat_manager.send_message(message_text.text)
+	network_chat_manager.send_message.rpc(message_text.text)
+	
 
 func _on_chat_history_changed(message):
 	chat_text.text = message
