@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs7q8ygmbtyyt"]
 
-[ext_resource type="Script" uid="uid://datyswkerx2k6" path="res://chat.gd" id="1_dg5i7"]
-[ext_resource type="PackedScene" uid="uid://ny3jfu5fpmxu" path="res://network_chat_manager.tscn" id="2_yj8al"]
+[ext_resource type="Script" uid="uid://datyswkerx2k6" path="res://Chat/chat.gd" id="1_dg5i7"]
+[ext_resource type="PackedScene" uid="uid://ny3jfu5fpmxu" path="res://Chat/network_chat_manager.tscn" id="2_yj8al"]
 
 [node name="Chat" type="Control"]
 layout_mode = 3

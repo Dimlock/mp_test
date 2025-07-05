@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bav5kga1pvge5" path="res://lobby.gd" id="1_2wvic"]
 [ext_resource type="PackedScene" uid="uid://c5djpgqn2478m" path="res://player_in_lobby.tscn" id="1_xrgmn"]
 [ext_resource type="PackedScene" uid="uid://cn7jqqk4ip177" path="res://lobby_timer.tscn" id="3_2wvic"]
-[ext_resource type="PackedScene" uid="uid://bs7q8ygmbtyyt" path="res://chat.tscn" id="4_tftiq"]
+[ext_resource type="PackedScene" uid="uid://bs7q8ygmbtyyt" path="res://Chat/chat.tscn" id="4_tftiq"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
