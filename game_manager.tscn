@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1ecke1ya23h2"]
+[gd_scene load_steps=3 format=3 uid="uid://b1ecke1ya23h2"]
 
 [ext_resource type="Script" uid="uid://l2r2hidtbxwo" path="res://game_manager.gd" id="1_70yv6"]
+[ext_resource type="PackedScene" uid="uid://breyp3c0xjy1d" path="res://lobby.tscn" id="2_smx3j"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_70yv6")
+lobby_scene = ExtResource("2_smx3j")

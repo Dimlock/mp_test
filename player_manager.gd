@@ -19,10 +19,10 @@ func create_player(player_name, player_id):
 	player_node.set_multiplayer_authority(player_id)
 	player_node.player_ready.connect(_on_player_ready)
 	players.add_child(player_node)
-	if !multiplayer.get_remote_sender_id():
-		current_player = player_node
-	else:
-		player_connected.emit(player_node)
+	#if !multiplayer.get_remote_sender_id():
+	current_player = player_node
+	#else:
+	player_connected.emit(player_node)
 	
 func _on_peer_connected(id):
 	create_player.rpc_id(id, current_player.name, current_player.get_multiplayer_authority())
